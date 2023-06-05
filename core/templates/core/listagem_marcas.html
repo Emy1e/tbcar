@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block title%}
+    Listagem - PREÇOS
+{% endblock %}
+{% block main %}
+<ul class="list-group">
+    {% for dado in dados%}
+        <li class="list-group-item">
+        <br>
+        Marca: {{dado.nome}} <br>
+        Site: {{dado.url}} <br>
+
+        {% if dado.foto %}
+             Foto: <img src="{{dado.logo.url}}" width="200"> <br>
+        {%else%}
+            <img src="{% static 'img/perfil.png'%}" width="200"> <br>
+        {%endif%}
+        <div class="d-flex">
+            <a href="{% url 'url_altera_marca' dado.id%}" class="btn btn-outline-info mr-2" role="button">Alterar</a>
+        </div>
+   </li>
+    {% endfor %}
+</ul>
+<br>
+<button onclick="window.location.href='/'" class="btn btn-outline-secondary">Home</button>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block title%}
+Listagem - Mensalistas
+{% endblock %}
+{% block main %}
+<ul class="list-group">
+    {% for dado in dados%}
+    <li class="list-group-item">
+        Veiculo: {{dado.idVeiculo}} <br>
+        Tabela: {{dado.idTabela}} <br>
+        {% if dado.observacoes %}
+        OBS: {{dado.observacoes}} <br>
+        {%else%}
+        <br>
+        {%endif%}
+        <div class="d-flex">
+            <a href="{% url 'url_exclui_mensalista' dado.id%}" class="btn btn-outline-info mr-2" role="button">Alterar</a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+<br>
+<button onclick="window.location.href='/'" class="btn btn-outline-secondary">Home</button>
+{% endblock %}
+

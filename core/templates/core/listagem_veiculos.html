@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block title%}
+    Listagem - Veiculos
+{% endblock %}
+{% block main %}
+<ul class="list-group">
+    {% for dado in dados%}
+        <li class="list-group-item">
+        <br>
+        Placa: {{dado.placa}} <br>
+        Modelo: {{dado.modelo}} <br>
+        Cliente: {{dado.cliente_id}} <br>
+        {% if dado.foto %}
+             Foto: <img src="{{dado.foto.url}}" width="200"> <br>
+        {%else%}
+            <img src="{% static 'img/perfil.png'%}" width="200"> <br>
+        {%endif%}
+        <div class="d-flex">
+            <a href="{% url 'url_altera_veiculo' dado.id%}" class="btn btn-outline-info mr-2" role="button">Alterar</a>
+            <a href="{% url 'url_exclui_veiculo' dado.id%}" class="btn btn-outline-danger" role="button">Excluir</a>
+        </div>
+     </li>
+    {% endfor %}
+</ul>
+<br>
+<button onclick="window.location.href='/'" class="btn btn-outline-secondary">Home</button>
+{% endblock %}

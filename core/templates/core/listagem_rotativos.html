@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block title%}
+Listagem - Rotativos
+{% endblock %}
+{% block main %}
+<ul class="list-group">
+    {% for dado in dados%}
+    <li class="list-group-item">
+        Veiculo: {{dado.idVeiculo}} <br>
+        Tabela: {{dado.idTabela}} <br>
+        Hora de entrada: {{dado.horaEntrada}} <br>
+        Hora de saída: {{dado.horaSaida}} <br>
+        Total: {{dado.total}}
+        Pago: {{dado.pago}}
+        {% if dado.observacoes %}
+        OBS: {{dado.observacoes}} <br>
+        {%else%}
+        <br>
+        {%endif%}
+        <div class="d-flex">
+            <a href="{% url 'url_altera_rotativo' dado.id%}" class="btn btn-outline-info mr-2" role="button">Alterar</a>
+            <a href="{% url 'url_exclui_rotativo' dado.id%}" class="btn btn-outline-danger" role="button">Excluir</a>
+        </div>
+
+    </li>
+    {% endfor %}
+</ul>
+<br>
+<button onclick="window.location.href='/'" class="btn btn-outline-secondary">Home</button>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static%}
+Listagem - Clientes
+{% block title%}
+
+{% endblock %}
+{% block main %}
+{% if messages %}
+    {%for mensagem in messages %}
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Feito!</strong> {{mensagem}}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<ul class="list-group">
+    {% for dado in dados%}
+
+
+    <li class="list-group-item">
+        <br>
+        Nome: {{dado.nome}} <br>
+        Telefone: {{dado.telefone}} <br>
+        Endereço: {% if dado.endereco %} {{dado.endereco}} {% endif %} <br>
+        Email: {{dado.email}} <br>
+        {% if dado.foto %}
+        Foto: <img src="{{dado.foto.url}}" width="200"> <br>
+        {%else%}
+        <img src="{% static 'img/perfil.png'%}" width="200"> <br>
+        {%endif%}
+        <br>
+        <div class="d-flex">
+            <a href="{% url 'url_altera_cliente' dado.id%}" class="btn btn-outline-info mr-2" role="button">Alterar</a>
+            <a href="{% url 'url_exclui_cliente' dado.id%}" class="btn btn-outline-danger" role="button">Excluir</a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+<br>
+<button onclick="window.location.href='/'" class="btn btn-outline-secondary">Home</button>
+{% endblock %}

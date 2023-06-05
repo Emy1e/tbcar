@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    {% block extrahead %}
+    {% endblock %}
+
+</head>
+<body>
+<div class="container-fluid pt-1 pt-2">
+    <div class="row" >
+        <div class="col-12">
+            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                <!-- Brand -->
+                <a class="navbar-brand" href="/">TBCAR</a>
+                <!-- Toggler/collapsibe Button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="row w-100 collapse navbar-collapse" id="collapsibleNavbar">
+                    <div class="col-6">
+                        <ul class="navbar-nav">
+                            <!-- Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                    Cliente
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/cadastroCliente/">Cadastro</a>
+                                    <a class="dropdown-item" href="/listagemClientes/">Listagem</a>
+                                </div>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop1"
+                                   data-toggle="dropdown">
+                                    Veículo
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/cadastroVeiculo/">Cadastro</a>
+                                    <a class="dropdown-item" href="/listagemVeiculos/">Listagem</a>
+                                </div>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop2"
+                                   data-toggle="dropdown">
+                                    Movimentação
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/cadastroMensalista/">Cadastro Mensalista</a>
+                                    <a class="dropdown-item" href="/listagemMensalistas/">Listagem Mensalista</a>
+                                    <a class="dropdown-item" href="/cadastroRotativo/">Cadastro Rotativo</a>
+                                    <a class="dropdown-item" href="/listagemRotativos/">Listagem Rotativo</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop3"
+                                   data-toggle="dropdown">
+                                    Tabela
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/cadastroTabela/">Cadastro</a>
+                                    <a class="dropdown-item" href="/listagemTabelas/">Listagem</a>
+                                </div>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop4"
+                                   data-toggle="dropdown">
+                                    Marca
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/cadastroMarca/">Cadastro</a>
+                                    <a class="dropdown-item" href="/listagemMarcas/">Listagem</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-3">
+                         <form class="form-inline" method="post">
+                             {% csrf_token %}
+                            <input class="form-control mr-sm-2" type="text" placeholder="{{txt_input}}" name="input_pesquisa">
+                            <button class="btn btn-success" type="submit">Pesquisar</button>
+                        </form>
+                    </div>
+                    <div class="col-3 text-white d-flex justify-content-center align-items-center">
+                        <!-- Inofrmações do usuario-->
+                        {% if user.get_username %}
+                        Bem-vindo (a) {{ user.get_username }}
+
+                        <a href="/admin" class="btn btn-outline-info" role="button">Admin</a>
+                        <a href="/accounts/logout/" class="btn btn-outline-info" role="button"> Logout</a>
+                        {% else %}
+                        Usuário(a) não autenticado(a)
+                        <a href="/accounts/login" class="btn btn-outline-info" role="button">Login</a>
+                        <a href="/accounts/registrar/" class="btn btn-outline-info" role="button"> Registrar</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+    </div>
+
+    {% block main %}
+    {% endblock%}
+</div>
+
+</body>
+</html>

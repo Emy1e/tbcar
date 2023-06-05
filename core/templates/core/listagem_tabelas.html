@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block title%}
+    Listagem - PREÇOS
+{% endblock %}
+{% block main %}
+<ul class="list-group">
+    {% for dado in dados%}
+        <li class="list-group-item">
+        <br>
+        Descrição: {{dado.descricao}} <br>
+        Preço: {{dado.preco}} <br>
+        <div class="d-flex">
+            <a href="{% url 'url_altera_tabela' dado.id%}" class="btn btn-outline-info mr-2" role="button">Alterar</a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+<br>
+<button onclick="window.location.href='/'" class="btn btn-outline-secondary">Home</button>
+{% endblock %}
